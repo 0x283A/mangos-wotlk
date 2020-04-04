@@ -62,47 +62,47 @@ install:
 matrix:
   include:
     # linux builds on gcc x64
-    - os: linux
-      arch: amd64
-      compiler: gcc
-      env:
-        - CC=gcc-7
-        - CXX=g++-7
-    # linux builds on clang x64
-    - os: linux
-      arch: amd64
-      compiler: clang
-      env:
-        - CC=clang
-        - CXX=clang++
-
-#    # linux builds on gcc ARM64
 #    - os: linux
-#      arch: arm64
+#      arch: amd64
 #      compiler: gcc
 #      env:
 #        - CC=gcc-7
 #        - CXX=g++-7
-#      install:
-#        # Install newer cmake
-#        - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-#        - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
-#        - travis_retry wget --no-check-certificate https://github.com/cyberium/prebuild/releases/download/v1.0/cmake-arm-3.16.2.tar.gz
-#        - tar -xvf cmake-arm-3.16.2.tar.gz > /dev/null
-#        - PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
-#        - cd ${TRAVIS_BUILD_DIR}
+    # linux builds on clang x64
+#    - os: linux
+#      arch: amd64
+#      compiler: clang
+#      env:
+#        - CC=clang
+#        - CXX=clang++
+
+    # linux builds on gcc ARM64
+    - os: linux
+      arch: arm64
+      compiler: gcc
+      env:
+        - CC=gcc-7
+        - CXX=g++-7
+      install:
+        # Install newer cmake#
+        - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+        - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
+        - travis_retry wget --no-check-certificate https://github.com/cyberium/prebuild/releases/download/v1.0/cmake-arm-3.16.2.tar.gz
+        - tar -xvf cmake-arm-3.16.2.tar.gz > /dev/null
+        - PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
+        - cd ${TRAVIS_BUILD_DIR}
 
     # osx builds on clang x64
-    - os: osx
-      osx_image: xcode10
-      arch: amd64
-      compiler: clang
-      env:
-        - MYSQL_HOME=/usr/local/opt/mysql-client@5.7
-      install:
-        - brew install mysql-client@5.7
-        - export OPENSSL_ROOT_DIR=$(brew --prefix openssl)
-        - brew upgrade cmake
+#    - os: osx
+#      osx_image: xcode10
+#      arch: amd64
+#      compiler: clang
+#      env:
+#        - MYSQL_HOME=/usr/local/opt/mysql-client@5.7
+#      install:
+#        - brew install mysql-client@5.7
+#        - export OPENSSL_ROOT_DIR=$(brew --prefix openssl)
+#        - brew upgrade cmake
 
 script: |-
   cmake --version
